@@ -12,16 +12,14 @@ stray WebView::start(application *app) {
     auto window  = window::create(app).value();
     auto webview = smartview::create({.window = window});
 
-    webview->embed(embedded::all());
-    webview->set_dev_tools(true);
+    webview -> embed(embedded::all());
+    webview -> set_dev_tools(true);
 
-    window -> set_title("Hello World!");
+    window -> set_decorations(window::decoration::none);
 
-    webview -> expose("call_me", [&](double a, double b)
-    {
-        std::println("Called with: a = {}, b = {}", a, b);
-        return a + b;
-    });
+    window -> set_title("Global Command");
+
+    window -> set_size({720, 140});
 
     webview -> expose("call_me_too", [&]() -> task<double>
     {
