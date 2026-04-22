@@ -11,7 +11,9 @@ include(cmake/CPM.cmake)
 
 add_executable(global-command src/main.cpp
         src/webview/webview.cpp
-        src/webview/webview.h)
+        src/webview/webview.h
+        src/utils/utils.cpp
+        src/utils/utils.h)
 
 # UI
 
