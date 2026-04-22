@@ -21,7 +21,7 @@ stray WebView::start(application *app) {
 
     window -> set_size({720, 140});
 
-    webview -> expose("call_me_too", [&]() -> task<double>
+    webview -> expose("search", [&](bool force) -> task<double>
     {
         auto random = *co_await webview->evaluate<double>("Math.random()");
         std::println("Random: {}", random);
