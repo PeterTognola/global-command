@@ -9,7 +9,7 @@ export const App: FC = () => {
 
     const handleSearch = async () => {
         // @ts-ignore
-        await saucer.exposed.call_me_too(false);
+        await saucer.exposed.search(false);
     }
 
     useEffect(() => {

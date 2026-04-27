@@ -20,6 +20,7 @@ stray WebView::start(application *app) {
     window -> set_title("Global Command");
 
     window -> set_size({720, 140});
+    window -> set_resizable(false);
 
     webview -> expose("search", [&](bool force) -> task<double>
     {

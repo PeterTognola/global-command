@@ -7,15 +7,6 @@ set(CMAKE_CXX_STANDARD 26)
 
 include(cmake/CPM.cmake)
 
-# Executable.
-
-add_executable(global-command
-        src/main.cpp
-        src/webview/webview.cpp
-        src/webview/webview.h
-        src/utils/utils.cpp
-        src/utils/utils.h)
-
 # UI.
 
 add_custom_command(
@@ -29,6 +20,16 @@ add_custom_command(
 )
 
 add_custom_target(ui DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/ui/dist/index.html")
+
+# Executable.
+
+add_executable(global-command
+        src/main.cpp
+        src/webview/webview.cpp
+        src/webview/webview.h
+        src/utils/utils.cpp
+        src/utils/utils.h)
+
 add_dependencies(${PROJECT_NAME} ui)
 
 # Libraries.
