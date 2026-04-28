@@ -13,7 +13,7 @@ stray WebView::start(application *app) {
     auto webview = smartview::create({.window = window});
 
     webview -> embed(embedded::all());
-    webview -> set_dev_tools(true);
+    // webview -> set_dev_tools(debug);
 
     window -> set_decorations(window::decoration::none);
 
