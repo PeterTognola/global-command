@@ -19,7 +19,8 @@ stray WebView::start(application *app) {
 
     window -> set_title("Global Command");
 
-    window -> set_size({720, 140});
+    window -> set_min_size({720, 80});
+    window -> set_size({720, 80});
     window -> set_resizable(false);
 
     webview -> expose("search", [&](bool force) -> task<double>
@@ -27,6 +28,10 @@ stray WebView::start(application *app) {
         auto random = *co_await webview->evaluate<double>("Math.random()");
         std::println("Random: {}", random);
         co_return random;
+    });
+
+    webview -> expose("close", [window]() -> task<void> {
+        window -> hide();
     });
 
     webview -> serve("/index.html");

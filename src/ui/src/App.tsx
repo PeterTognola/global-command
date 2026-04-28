@@ -12,21 +12,34 @@ export const App: FC = () => {
         await saucer.exposed.search(false);
     }
 
+    const handleEvent = async (e: any) => {
+        setSearch(e.target.value)
+    }
+
     useEffect(() => {
         // todo bounce off
 
         handleSearch().catch(console.error);
-    }, [search])
+    }, [search]);
+
+    useEffect(() => {
+        document.body.addEventListener('keydown', async function(e) {
+            if (e.key == "Escape") {
+                //@ts-ignore
+                await saucer.exposed.close();
+            }
+        });
+    }, []);
 
   return (
     <>
       <div className="innershell--command">
         <input
             type="text"
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={handleEvent}
             value={search}
             placeholder="Search..."
-            style={{width: "100%", height: 40, background: "red"}} />
+            style={{width: "100%", height: "80px"}} />
       </div>
 
       <div className={"innershell--output"}></div>

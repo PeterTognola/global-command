@@ -9,12 +9,31 @@ include(cmake/CPM.cmake)
 
 # UI.
 
+set(UI_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/src/ui")
+
+if (NOT EXISTS "${UI_INDEX_HTML}")
+    message(STATUS "UI dist not found; building UI before embedding...")
+
+    execute_process(
+            COMMAND npm install
+            WORKING_DIRECTORY "${UI_SOURCE_DIR}"
+            COMMAND_ERROR_IS_FATAL ANY
+    )
+
+    execute_process(
+            COMMAND npm run build
+            WORKING_DIRECTORY "${UI_SOURCE_DIR}"
+            COMMAND_ERROR_IS_FATAL ANY
+    )
+endif ()
+
 add_custom_command(
-        OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/src/ui/dist/index.html"
+        OUTPUT "${UI_SOURCE_DIR}/dist/index.html"
+        COMMAND "${CMAKE_COMMAND}" -E rm -rf "${UI_SOURCE_DIR}/dist"
         COMMAND npm install
         COMMAND npm run build
-        WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/src/ui"
-        DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/src/ui/src" "${CMAKE_CURRENT_SOURCE_DIR}/src/ui/package.json"
+        WORKING_DIRECTORY "${UI_SOURCE_DIR}"
+        DEPENDS "${UI_SOURCE_DIR}/src" "${UI_SOURCE_DIR}/package.json"
         COMMENT "Building UI..."
         VERBATIM
 )
