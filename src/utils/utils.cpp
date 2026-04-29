@@ -28,8 +28,11 @@ namespace utils {
 
     string Utils::joinToStringArray(const string &prev, const string &curr) {
         return format(
+            // Our string template.
             "{}, '{}'",
+            // If this is our first element, format differently.
             prev.contains("', '") ? prev : format("'{}'", prev),
+            // Curr will feel left out if not comment...
             curr);
     }
 
