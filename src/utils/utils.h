@@ -13,6 +13,7 @@ namespace utils {
     class Utils {
         public:
             static vector<string> getListCommand(const string& command);
+            static string joinToStringArray(const string &prev, const string &curr);
     };
 
     class Programs {

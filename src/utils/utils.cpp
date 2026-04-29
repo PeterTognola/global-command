@@ -26,6 +26,13 @@ namespace utils {
         return results;
     }
 
+    string Utils::joinToStringArray(const string &prev, const string &curr) {
+        return format(
+            "{}, '{}'",
+            prev.contains("', '") ? prev : format("'{}'", prev),
+            curr);
+    }
+
     std::vector<std::string> Programs::getPrograms() {
         return Utils::getListCommand("ls /usr/share/applications | awk -F '.desktop' ' { print $1}' -");
     }

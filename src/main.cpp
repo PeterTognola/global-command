@@ -14,7 +14,6 @@ int main()
      * - Allow calculations.
      * - Run bash commands.
      */
-    for (const auto& file: Programs::getPrograms()) std::cout << "test " << file << std::endl;
 
     return application::create({.id = "command"})->run(WebView::start);
 }

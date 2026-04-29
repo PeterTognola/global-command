@@ -35,12 +35,13 @@ stray WebView::start(application *app) {
         co_return random;
     });
 
-    webview -> inject({
-        .code = "window.apps = ['1','2','3']",
-        .run_at = script::time::creation
+    webview -> expose("expand", [&] {
+        window -> set_size({720, 300});
     });
 
-    webview -> expose("close", [window]() -> task<void> {
+    webview -> inject(createAppInjection());
+
+    webview -> expose("close", [window] {
         window -> hide();
     });
 
@@ -55,13 +56,11 @@ script WebView::createAppInjection() {
     auto files = utils::Programs::getPrograms();
 
     auto alt = std::accumulate(
-    std::next(files.begin()),
-    files.end(),
-    files[0],
-    [](std::string a, std::string b) {
-        return a + "," + format("\"{}\"", b);
-    }
-);
+        std::next(files.begin()),
+        files.end(),
+        files[0],
+        utils::Utils::joinToStringArray
+    );
 
     return {
         .code = format("window.apps = [{}]", alt),
