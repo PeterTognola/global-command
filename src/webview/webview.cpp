@@ -52,11 +52,16 @@ stray WebView::start(application *app) {
     co_await app->finish();
 }
 
+void WebView::expose(webview &webview) {
+
+}
+
 script WebView::createAppInjection() {
     auto files = utils::Programs::getPrograms();
 
+    // Merge files into a single array inside a string.
     auto alt = std::accumulate(
-        std::next(files.begin()),
+        next(files.begin()),
         files.end(),
         files[0],
         utils::Utils::joinToStringArray

@@ -9,7 +9,6 @@ int main()
 {
     /*
      * todo
-     * - Search and launch apps.
      * - Search files (not sure how to do this properly yet).
      * - Allow calculations.
      * - Run bash commands.
