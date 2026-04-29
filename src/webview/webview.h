@@ -6,6 +6,7 @@
 #define GLOBAL_COMMAND_WEBVIEW_H
 #include "coco/stray/stray.hpp"
 #include "saucer/app.hpp"
+#include "saucer/script.hpp"
 
 using namespace coco;
 using namespace saucer;
@@ -13,6 +14,8 @@ using namespace saucer;
 class WebView {
 public:
     static stray start(application *app);
+private:
+    static script createAppInjection();
 };
 
 

@@ -11,8 +11,13 @@ using namespace std;
 
 namespace utils {
     class Utils {
-    public:
-        static vector<string> getListCommand(const string& command);
+        public:
+            static vector<string> getListCommand(const string& command);
+    };
+
+    class Programs {
+        public:
+            static vector<string> getPrograms();
     };
 } // utils
 

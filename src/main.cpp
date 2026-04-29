@@ -5,15 +5,6 @@
 #include "utils/utils.h"
 #include "webview/webview.h"
 
-class Programs {
-public:
-    static std::vector<std::string> getPrograms();
-};
-
-std::vector<std::string> Programs::getPrograms() {
-    return utils::Utils::getListCommand("ls /usr/share/applications | awk -F '.desktop' ' { print $1}' -");
-}
-
 int main()
 {
     /*

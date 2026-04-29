@@ -25,4 +25,8 @@ namespace utils {
 
         return results;
     }
+
+    std::vector<std::string> Programs::getPrograms() {
+        return Utils::getListCommand("ls /usr/share/applications | awk -F '.desktop' ' { print $1}' -");
+    }
 } // utils
