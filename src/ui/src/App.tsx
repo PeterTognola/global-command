@@ -19,7 +19,7 @@ export const App: FC = () => {
         setResults([{name: "test"}]);
 
         // @ts-ignore
-        await saucer.exposed.expand(search.length > 0 ? results.length * 30 : 0);
+        await saucer.exposed.expand(search.length > 0 ? results.length * 2 * 44 : 0);
     }
 
     const handleEvent = async (e: any) => {
@@ -49,12 +49,12 @@ export const App: FC = () => {
             onChange={handleEvent}
             value={search}
             placeholder="Search..."
-            style={{width: "100%", height: "80px", outline: 0, border: 0}} />
+            style={{width: "calc(100% - 2px)", height: "80px", outline: 0, border: 0, borderRadius: "16px"}} />
       </div>
 
         {search.length > 0 &&
           <div className={"output"}>
-              {results.map((r: Result, i: number) => <ResultComponent key={i} result={r} />)}
+              {[...results, ...results].map((r: Result, i: number) => <ResultComponent key={i} result={r} />)}
           </div>
         }
     </>
