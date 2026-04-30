@@ -24,9 +24,13 @@ stray WebView::start(application *app) {
 
     window -> set_title("Global Command");
 
+    window -> set_background({0, 0, 0, 0});
+
     window -> set_min_size({720, 80});
     window -> set_size({720, 80});
     window -> set_resizable(false);
+
+    webview -> set_background({0, 0, 0, 0});
 
     webview -> expose("search", [&]() -> task<double>
     {
@@ -35,8 +39,8 @@ stray WebView::start(application *app) {
         co_return random;
     });
 
-    webview -> expose("expand", [&] {
-        window -> set_size({720, 300});
+    webview -> expose("expand", [&](const int extension) {
+        window -> set_size({720, 80 + extension});
     });
 
     webview -> inject(createAppInjection());
@@ -49,10 +53,10 @@ stray WebView::start(application *app) {
 
     window -> show();
 
-    co_await app->finish();
+    co_await app -> finish();
 }
 
-void WebView::expose(webview &webview) {
+void WebView::expose(webview *webview) {
 
 }
 

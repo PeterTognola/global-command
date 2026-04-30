@@ -9,11 +9,19 @@ export const App: FC = () => {
 
     const handleSearch = async () => {
         // @ts-ignore
-        await saucer.exposed.search(false);
+        //await saucer.exposed.search(false);
+
+
+        // get results.
+        const results = ["test"];
+
+        // @ts-ignore
+        await saucer.exposed.expand(search.length > 0 ? results.length * 30 : 0);
     }
 
     const handleEvent = async (e: any) => {
-        setSearch(e.target.value)
+        const input = e.target.value;
+        setSearch(input);
     }
 
     useEffect(() => {
@@ -39,7 +47,7 @@ export const App: FC = () => {
             onChange={handleEvent}
             value={search}
             placeholder="Search..."
-            style={{width: "100%", height: "80px"}} />
+            style={{width: "100%", height: "80px", outline: 0, border: 0}} />
       </div>
 
       <div className={"innershell--output"}></div>

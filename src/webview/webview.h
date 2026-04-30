@@ -16,7 +16,7 @@ class WebView {
 public:
     static stray start(application *app);
 private:
-    static void expose(webview& webview);
+    static void expose(webview *webview);
     static script createAppInjection();
 };
 
