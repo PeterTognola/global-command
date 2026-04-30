@@ -47,6 +47,7 @@ stray WebView::start(application *app) {
 
     webview -> expose("close", [window] {
         window -> hide();
+        app ->
     });
 
     webview -> serve("/index.html");
