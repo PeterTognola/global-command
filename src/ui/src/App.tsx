@@ -1,19 +1,22 @@
 import './App.css'
 import {type FC, useEffect, useState} from "react";
+import {ResultComponent} from "./components/ResultComponent.tsx";
 
 // @ts-ignore
 window.saucer = window.saucer || {};
 
+export type Result = {
+    name: string;
+}
+
 export const App: FC = () => {
     const [search, setSearch] = useState("");
+    const [results, setResults] = useState<Result[]>([{name: "test"}]);
 
     const handleSearch = async () => {
         // @ts-ignore
         //await saucer.exposed.search(false);
-
-
-        // get results.
-        const results = ["test"];
+        setResults([{name: "test"}]);
 
         // @ts-ignore
         await saucer.exposed.expand(search.length > 0 ? results.length * 30 : 0);
@@ -26,7 +29,6 @@ export const App: FC = () => {
 
     useEffect(() => {
         // todo bounce off
-
         handleSearch().catch(console.error);
     }, [search]);
 
@@ -41,7 +43,7 @@ export const App: FC = () => {
 
   return (
     <>
-      <div className="innershell--command">
+      <div className="command">
         <input
             type="text"
             onChange={handleEvent}
@@ -50,7 +52,11 @@ export const App: FC = () => {
             style={{width: "100%", height: "80px", outline: 0, border: 0}} />
       </div>
 
-      <div className={"innershell--output"}></div>
+        {search.length > 0 &&
+          <div className={"output"}>
+              {results.map((r: Result, i: number) => <ResultComponent key={i} result={r} />)}
+          </div>
+        }
     </>
   )
 };
