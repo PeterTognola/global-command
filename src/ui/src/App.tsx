@@ -16,7 +16,7 @@ export const App: FC = () => {
     const handleSearch = async () => {
         // @ts-ignore
         //await saucer.exposed.search(false);
-        setResults([{name: "test"}]);
+        setResults(window.apps.map(y => ({name: y})).slice(0, 4)); // todo search functionality.
 
         // @ts-ignore
         await saucer.exposed.expand(search.length > 0 ? results.length * 2 * 44 : 0);

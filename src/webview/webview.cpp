@@ -32,13 +32,6 @@ stray WebView::start(application *app) {
 
     webview -> set_background({0, 0, 0, 0});
 
-    webview -> expose("search", [&]() -> task<double>
-    {
-        auto random = *co_await webview->evaluate<double>("Math.random()");
-        std::println("Random: {}", random);
-        co_return random;
-    });
-
     webview -> expose("expand", [&](const int extension) {
         window -> set_size({720, 80 + extension});
     });
